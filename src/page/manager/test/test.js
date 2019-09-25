@@ -2,6 +2,7 @@ import React, {Component} from "react";
 
 import "./test.css"
 import moment from "moment";
+import {Input} from "antd";
 
 export const Test = () => {
     return (
@@ -58,15 +59,18 @@ class User extends Component {
     constructor(props){
         super(props);
         setTimeout(()=>{
-            this.nameInput.focus();
+            this.input1.focus();
         },5000);
         setTimeout(()=>{
-            console.log(this.nameInput.value);
+            this.input2.focus();
         },15000)
     }
     render () {
         return (
-            <input ref={(input)=>this.nameInput = input} type={"text"} />
+            <div>
+                <Input ref={(input)=>this.input1 = input} placeholder={"input1"}/>
+                <Input ref={(input)=>this.input2 = input} placeholder={"input2"}/>
+            </div>
         )
     }
 }
