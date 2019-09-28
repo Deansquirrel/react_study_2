@@ -1,10 +1,11 @@
-import {combineReducers, createStore} from "redux";
+import {applyMiddleware, combineReducers, createStore} from "redux";
 // import {applyMiddleware} from "redux";
 // import {createLogger} from 'redux-logger';
 // import thunk from 'redux-thunk';
 
 import {app} from "./reducer";
 import {page} from "./reducer";
+import {loggerMiddleware, ywMiddleware} from "./middleware";
 
 // const logger = createLogger();
 
@@ -21,7 +22,7 @@ const defaultState = {
         },
         manager:{
             test:{
-                a:"aaa",
+                a:"",
                 b:"bbb",
                 currType:"",
                 typeData:[
@@ -44,6 +45,7 @@ const defaultState = {
 const store = createStore(
     combineReducers({app,page}),
     defaultState,
+    applyMiddleware(ywMiddleware,loggerMiddleware)
     // applyMiddleware(logger)
     // applyMiddleware(thunk,logger)
 );

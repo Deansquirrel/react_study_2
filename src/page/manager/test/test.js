@@ -5,7 +5,7 @@ import "./test.css"
 
 import store from "../../../data/store";
 import {PageManagerTestCurrTypeAction} from "../../../data/actions";
-import {RefreshTypeData} from "../../../data/dataInterface";
+import {GetUser, RefreshTypeData} from "../../../data/dataInterface";
 
 export class Test extends Component {
 
@@ -19,6 +19,7 @@ export class Test extends Component {
                 store.dispatch(PageManagerTestCurrTypeAction(list[0]));
             }
         }
+        GetUser();
     }
 
     componentWillUnmount() {
@@ -83,3 +84,21 @@ const getShowValue = () => {
         return {};
     }
 };
+
+// const ShowWithLoading = withLoadingHoC(store.getState().page.manager.test.a==="")(aShower);
+
+// const aShower = () => {
+//     return (
+//         <div>
+//             <span>a</span><span>{store.getState().page.manager.test.a}</span>
+//         </div>
+//     )
+// };
+//
+// const withLoadingHoC = (loadingCheck) => (WrappedComponent) => {
+//     return class extends Component {
+//         render() {
+//             return loadingCheck?<div>Loading</div>:<WrappedComponent/>
+//         }
+//     }
+// };
