@@ -1,37 +1,66 @@
 import C from "./constants";
 
-export const AppWsAddressAction = (wsAddress="") => (
+export const GlobalVersionAction = (version="") => (
     {
-        type:C.AppWsAddress,
-        wsAddress:wsAddress,
-    }
-);
-
-export const AppVersionAction = (version="") => (
-    {
-        type:C.AppVersion,
+        type:C.GlobalVersion,
         version:version,
     }
 );
 
-
-export const AppWsVersionAction = (wsVersion="") => (
+export const GlobalResVersionAction = (resVersion="") =>(
     {
-        type:C.AppWsVersion,
-        wsVersion:wsVersion,
+        type:C.GlobalResVersion,
+        resVersion:resVersion,
     }
 );
 
-export const PageManagerTestCurrTypeAction = (currType="") => (
+export const UserIsAuthenticatedAction = (isAuthenticated=false) => (
     {
-        type:C.PageManagerTestCurrType,
-        currType:currType,
+        type:C.UserIsAuthenticated,
+        isAuthenticated:isAuthenticated,
     }
 );
 
-export const PageManagerTestTypeDataAction = (typeData=[]) => (
+export const UserConnectIdAction = (connectId="") => (
     {
-        type:C.PageManagerTestTypeData,
-        typeData:typeData,
+        type:C.UserConnectId,
+        connectId:connectId,
     }
-);
+)
+
+//
+// export const AppWsAddressAction = (wsAddress="") => (
+//     {
+//         type:C.AppWsAddress,
+//         wsAddress:wsAddress,
+//     }
+// );
+//
+// export const AppVersionAction = (version="") => (
+//     {
+//         type:C.AppVersion,
+//         version:version,
+//     }
+// );
+//
+//
+// export const AppWsVersionAction = (wsVersion="") => (
+//     {
+//         type:C.AppWsVersion,
+//         wsVersion:wsVersion,
+//     }
+// );
+//
+// export const PageManagerTestCurrTypeAction = (currType="") => (
+//     {
+//         type:C.PageManagerTestCurrType,
+//         currType:currType,
+//     }
+// );
+//
+// export const PageManagerTestTypeDataAction = (typeData=[]) => (
+//     {
+//         type:C.PageManagerTestTypeData,
+//         typeData:typeData,
+//     }
+// );

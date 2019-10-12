@@ -1,6 +1,0 @@
-[
-  {"key":"welcome","icon":"table","title":"Welcome","child":[]},
-  {"key":"MyPage","icon":"table","title":"MyPage","child":[
-    {"key":"test","title":"Test"}
-  ]}
-]

@@ -1,66 +1,94 @@
 import React, {Component} from "react";
-// import PropTypes from 'prop-types';
-// import {combineReducers,createStore} from "redux";
+import {Button, Icon, Layout, Menu} from "antd";
+import {Link} from "react-router-dom";
+import store from "../../data/store";
+import {UserConnectIdAction, UserIsAuthenticatedAction} from "../../data/actions";
+import {GetMenuData} from "../../common/common";
 
-// import "../../App.css"
-// import "../common.css"
-import "./manager.css"
-
-import {Button,Layout,Icon,Menu} from "antd";
-
-// import {CommonBottom} from "../common";
-import {Welcome} from "./welcome/welcome";
-import {Test} from "./test/test";
-import {GetMenuData} from "../../config/common";
+import "./manager.css";
+import MyPageContent, {GetMenuOpenKey, GetMenuSelectKey} from "./router";
 
 const { Header, Sider } = Layout;
-const { SubMenu } = Menu;
+
+const logout = () => {
+    store.dispatch(UserIsAuthenticatedAction(false));
+    store.dispatch(UserConnectIdAction(""));
+};
 
 export class Manager extends Component {
     constructor(props){
         super(props);
-        this.state = {
+        this.state={
+            selectedKey:"welcome",
+            openKeys:"",
+            leftWidth:256,
             collapsed:false,
-            version:"0.0.0 Build20190101",
-            wsVersion:"0.0.0 Build20190101",
-            defaultOpenKeys:["MyPage"],
-            page:"test",
-        }
+        };
+    }
+
+    componentDidMount() {
+        this.setState({
+            selectedKey:GetMenuSelectKey(this.props.match),
+            openKeys:GetMenuOpenKey(this.props.match),
+        })
     }
 
     render() {
-        const {version,wsVersion,collapsed,page,defaultOpenKeys} = this.state;
+        // const version = "0.0.0";
+        // const resVersion = "0.0.0";
+        const collapsed = this.state.collapsed;
+        const leftWidth = collapsed?80:256;
         const menuData = GetMenuData();
+
         return (
-            <div className={"rootContainer"}>
+            <div  className={"rootContainer"}>
                 <Layout>
                     <Sider
-                        width={256}
-                        style={{minHeight:'100vh'}}
+                        width={leftWidth}
+                        style={{
+                            height:'100vh',
+                            overflow:'auto',
+                            position:'fixed',
+                            left:0,
+                            zIndex:2,
+                        }}
                         trigger={null}
                         collapsible
-                        collapsed={this.state.collapsed}>
+                        collapsed={collapsed}
+                    >
                         <div className="logo" />
                         <MenuList
+                            selectedKeys={[this.state.selectedKey]}
+                            defaultOpenKeys={[this.state.openKeys]}
                             menuData={menuData}
-                            selectedKeys={[page]}
-                            defaultOpenKeys={defaultOpenKeys}
-                            onClick={(page)=>{
+                            match={this.props.match}
+                            onOpenChange={(openKeys)=>{
                                 this.setState({
-                                    page:page,
-                                })
+                                    openKeys:newOpenKes(openKeys,this.state.openKeys),
+                                });
+                                this.forceUpdate();
                             }}
-                            style={{marginBottom:'80px'}} />
-                        <div style={{width:'100%',height:'80px',backgroundColor:'transparent'}} />
-                        <div className={"ManagerVersionInfo"}
-                             style={{display:collapsed?"none":"block"}}>
-                            <span>ver {version}</span>
-                            <br/>
-                            <span>res {wsVersion}</span>
-                        </div>
+                            onItemClick={(key="",clearOpenKeys=false)=>{
+                                this.setState({
+                                    selectedKey:key,
+                                });
+                                if(clearOpenKeys){
+                                    this.setState({
+                                        openKeys:"",
+                                    });
+                                }
+                            }}
+                        />
                     </Sider>
-                    <Layout>
-                        <Header style={{ background: '#fff', padding: 0 , width: '100%' }}>
+                    <Layout style={{height:"100%"}}>
+                        <Header style={{
+                            background: '#fff',
+                            padding: 0,
+                            position:"fixed",
+                            zIndex:1,
+                            width:"100%",
+                            paddingLeft:leftWidth
+                        }}>
                             <Icon
                                 className="trigger"
                                 type={collapsed ? 'menu-unfold' : 'menu-fold'}
@@ -70,14 +98,22 @@ export class Manager extends Component {
                             />
                             <div className={"rightHeader"}>
                                 <Button type={"link"}
-                                        onClick={()=>console.log("Logout")}
+                                        // onClick={()=>console.log("Logout")}
+                                        onClick={()=>logout()}
                                 >
                                     <Icon type="logout" />Logout
                                 </Button>
                             </div>
                         </Header>
-                        <PageContent page={page}/>
-                        <CommonBottom/>
+                        <Layout style={{
+                            width:"100%",
+                            minHeight:"100vh",
+                            paddingLeft:leftWidth,
+                            paddingTop:"64px"
+                        }}>
+                            <MyPageContent match={this.props.match} />
+                            <CommonBottom />
+                        </Layout>
                     </Layout>
                 </Layout>
             </div>
@@ -85,35 +121,46 @@ export class Manager extends Component {
     }
 }
 
-const MenuList = ({selectedKeys=[],defaultOpenKeys=[],menuData=[],onClick=f=>f}) => {
+const newOpenKes = (openKeys=[],currKeys="") =>{
+    let nOpenKeys = openKeys.join("@@@");
+    nOpenKeys=nOpenKeys.replace(currKeys,"");
+    nOpenKeys=nOpenKeys.replace(/@@@/g,"");
+    return nOpenKeys;
+};
+
+const { SubMenu } = Menu;
+const MenuList = ({selectedKeys=[],defaultOpenKeys=[],menuData=[],match,onOpenChange=f=>f,onItemClick=f=>f}) => {
     return (
         <Menu
             theme="dark"
             mode="inline"
             selectedKeys={selectedKeys}
-            defaultOpenKeys={defaultOpenKeys}
+            openKeys={defaultOpenKeys}
+            onOpenChange={onOpenChange}
+            style={{
+                marginBottom:"64px"
+            }}
         >
             {menuData.map((item)=>{
-                if (item.child&&item.child.length > 0){
+                if(item.hasOwnProperty("child")&&item.child.length>0){
                     return (
                         <SubMenu
                             key={item.key}
-                            title={<span><Icon type={item.icon} /><span>{item.title}</span></span>}>
+                            title={<span><Icon type={item.icon} /><span>{item.title}</span></span>}
+                        >
                             {item.child.map((subItem)=>{
                                 return (
-                                    <Menu.Item key={subItem.key}
-                                               onClick={()=>onClick(subItem.key)} >
-                                        <span>{subItem.title}</span>
+                                    <Menu.Item key={subItem.key} onClick={()=>onItemClick(subItem.key)}>
+                                        <Link to={`${match.url}/${subItem.path}`}>{subItem.title}</Link>
                                     </Menu.Item>
                                 )
                             })}
                         </SubMenu>
                     )
-                } else {
+                }else{
                     return (
-                        <Menu.Item key={item.key} onClick={()=>onClick(item.key)}>
-                            <Icon type={item.icon} />
-                            <span>{item.title}</span>
+                        <Menu.Item key={item.key} onClick={()=>onItemClick(item.key,true)}>
+                            <Link to={`${match.url}/${item.path}`}><Icon type={item.icon} /><span>{item.title}</span></Link>
                         </Menu.Item>
                     )
                 }
@@ -122,31 +169,12 @@ const MenuList = ({selectedKeys=[],defaultOpenKeys=[],menuData=[],onClick=f=>f})
     )
 };
 
-const PageContent = ({page=""}) => {
-    switch (page) {
-        case "welcome":
-            return <Welcome />;
-        case "test":
-            return <Test/>;
-        // case "Z5MdDataTrans":
-        //     return <HeartBeatMonitor
-        //         wsAddress={store.getState().managerState.wsAddress}
-        //         type={"Z5MdDataTrans"}
-        //     />;
-        // case "Z9MdDataTransV2":
-        //     return <HeartBeatMonitor
-        //         wsAddress={store.getState().managerState.wsAddress}
-        //         type={"Z9MdDataTransV2"}
-        //     />;
-        default:
-            return <Welcome  />;
-    }
-};
-
-export const CommonBottom = () => {
+const CommonBottom = () => {
     return (
         <div className={"CommonBottom"}>
             @Test
         </div>
     )
 };
+
+

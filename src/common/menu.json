@@ -1,0 +1,15 @@
+[
+  {"key":"welcome","path":"welcome","icon":"table","title":"Welcome"},
+  {"key":"testPage1","icon":"table","title":"TestPage1","child":[
+    {"key":"testPage11","path":"11","title":"TestPage11"},
+    {"key":"testPage12","path":"12","title":"TestPage12"}
+  ]},
+  {"key":"testPage2","icon":"table","title":"TestPage2","child":[
+    {"key":"testPage21","path":"21","title":"TestPage21"},
+    {"key":"testPage22","path":"22","title":"TestPage22"}
+  ]},
+  {"key":"testPage3","icon":"table","title":"TestPage3","child":[
+    {"key":"testPage31","path":"31","title":"TestPage31"},
+    {"key":"testPage32","path":"32","title":"TestPage32"}
+  ]}
+]

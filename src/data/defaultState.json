@@ -1,0 +1,10 @@
+{
+  "global": {
+    "version": "test Version",
+    "resVersion": ""
+  },
+  "user": {
+    "isAuthenticated": false,
+    "connectId": ""
+  }
+}
