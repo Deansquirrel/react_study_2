@@ -28,7 +28,7 @@ export class MyRoute extends Component {
     }
 }
 
-const Welcome = () => <Redirect to={{pathname:"/manager"}} />;
+const Welcome = () => <Redirect to={{pathname:"/manager/welcome"}} />;
 
 export const PrivateRoute = ({component:Component,...rest}) => (
     <Route
@@ -40,3 +40,4 @@ export const PrivateRoute = ({component:Component,...rest}) => (
         }
     />
 );
+
