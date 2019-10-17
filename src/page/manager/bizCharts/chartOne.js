@@ -27,11 +27,11 @@ export class ChartOne extends Component {
     render() {
         const data = this.state.data;
         return (
-            <div className={"ContentMargin"}>
-                <Chart forceFit={true} height={500} data={data} scale={cols} style={{background:"white",paddingTop:"64px"}}>
+            <div>
+                <Chart forceFit={true} height={300} data={data} scale={cols} style={{background:"white",paddingTop:"64px"}}>
                     <Axis name="genre" title/>
                     <Axis name="sold" title/>
-                    <Legend position="top" dy={-20} />
+                    <Legend position="top" />
                     <Tooltip />
                     <Geom type="interval" position="genre*sold" color="genre" />
                 </Chart>
@@ -60,13 +60,6 @@ const GetData = () => {
         { genre: 'C', sold: RandInt(0,100), income: 982 },
         { genre: 'D', sold: RandInt(0,100), income: 5271 },
         { genre: 'E', sold: RandInt(0,100), income: 2300 },
-        { genre: 'F', sold: RandInt(0,100), income: 667 },
-        { genre: 'G', sold: RandInt(0,100), income: 982 },
-        { genre: 'H', sold: RandInt(0,100), income: 5271 },
-        { genre: 'I', sold: RandInt(0,100), income: 2300 },
-        { genre: 'J', sold: RandInt(0,100), income: 667 },
-        { genre: 'K', sold: RandInt(0,100), income: 982 },
-        { genre: 'L', sold: RandInt(0,100), income: 5271 },
         { genre: 'Other', sold: RandInt(0,100), income: 3710 }
     ]
 };
