@@ -26,7 +26,21 @@ export const UserConnectIdAction = (connectId="") => (
         type:C.UserConnectId,
         connectId:connectId,
     }
-)
+);
+
+export const PageManagerMenuOpenKeyAction = (menuOpenKey="") => (
+    {
+        type:C.PageManagerMenuOpenKey,
+        menuOpenKey:menuOpenKey,
+    }
+);
+
+export const PageManagerMenuSelectedKeyAction = (menuSelectedKey="") => (
+    {
+        type:C.PageManagerMenuSelectedKey,
+        menuSelectedKey:menuSelectedKey,
+    }
+);
 
 //
 // export const AppWsAddressAction = (wsAddress="") => (

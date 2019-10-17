@@ -1,18 +1,5 @@
-// import React, {Component} from "react";
-//
-// export class Login extends Component {
-//     render() {
-//         return (
-//             <div>
-//                 Login
-//             </div>
-//         )
-//     }
-// }
-
 import React, {Component} from "react";
 import { Redirect } from "react-router-dom";
-// import PropTypes from 'prop-types';
 import { Form,Icon, Input,Button,message } from 'antd';
 
 import uuid from "uuid";

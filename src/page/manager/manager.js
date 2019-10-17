@@ -1,9 +1,16 @@
 import React, {Component} from "react";
-import {Button, Icon, Layout} from "antd";
+import {Button, Icon, Layout,Menu} from "antd";
+import {Link} from "react-router-dom";
 import "./manager.css";
-import {UserConnectIdAction, UserIsAuthenticatedAction} from "../../data/actions";
+import {
+    PageManagerMenuOpenKeyAction,
+    PageManagerMenuSelectedKeyAction,
+    UserConnectIdAction,
+    UserIsAuthenticatedAction
+} from "../../data/actions";
 import store from "../../data/store";
-import {MyMenuList, MyPageContent} from "./router";
+import {MyPageContent} from "./router";
+import {GetMenuData} from "../../common/common";
 
 const { Header, Sider } = Layout;
 
@@ -16,10 +23,20 @@ export class Manager extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            openKey:"",
+            selectedKey:"",
             leftWidth: 256,
             collapsed: false,
         };
+        this.updateMenuState.bind(this);
     }
+
+    updateMenuState = (openKey="",selectedKey="") => {
+        this.setState({
+            openKey:openKey,
+            selectedKey:selectedKey,
+        })
+    };
 
     render() {
         // const version = "0.0.0";
@@ -45,7 +62,7 @@ export class Manager extends Component {
                         collapsed={collapsed}
                     >
                         <div className="logo" />
-                        <MyMenuList match={this.props.match} />
+                        <MenuList match={this.props.match} />
                     </Sider>
                     <Layout style={{height:"100%"}}>
                         <Header style={{
@@ -93,5 +110,63 @@ const CommonBottom = () => {
         <div className={"CommonBottom"}>
             @Test
         </div>
+    )
+};
+
+const newOpenKes = (openKeys=[],currKeys="") =>{
+    let nOpenKeys = openKeys.join("@@@");
+    nOpenKeys=nOpenKeys.replace(currKeys,"");
+    nOpenKeys=nOpenKeys.replace(/@@@/g,"");
+    return nOpenKeys;
+};
+
+const { SubMenu } = Menu;
+const MenuList = ({match}) => {
+    const menuData = GetMenuData();
+    const openKey = store.getState().page.manager.menuOpenKey;
+    const selectedKey = store.getState().page.manager.menuSelectedKey;
+    return (
+        <Menu
+            theme="dark"
+            mode="inline"
+            selectedKeys={[selectedKey]}
+            openKeys={[openKey]}
+            onOpenChange={(openKeys)=>{
+                store.dispatch(PageManagerMenuOpenKeyAction(newOpenKes(openKeys,openKey)));
+            }}
+            style={{
+                marginBottom:"64px"
+            }}
+        >
+            {menuData.map((item)=>{
+                if(item.hasOwnProperty("child")&&item.child.length>0){
+                    return (
+                        <SubMenu
+                            key={item.key}
+                            title={<span><Icon type={item.icon} /><span>{item.title}</span></span>}
+                        >
+                            {item.child.map((subItem)=>{
+                                return (
+                                    <Menu.Item key={subItem.key} onClick={()=>{
+                                        store.dispatch(PageManagerMenuSelectedKeyAction(subItem.key))
+                                    }}>
+                                        <Link to={`${match.url}/${subItem.path}`}>{subItem.title}</Link>
+                                    </Menu.Item>
+                                )
+                            })}
+                        </SubMenu>
+                    )
+                }else{
+                    return (
+                        <Menu.Item key={item.key} onClick={()=>{
+                            store.dispatch(PageManagerMenuSelectedKeyAction(item.key));
+                            store.dispatch(PageManagerMenuOpenKeyAction(""));
+                        }}>
+                            <Link to={`${match.url}/${item.path}`}><Icon type={item.icon} /><span>{item.title}</span></Link>
+                        </Menu.Item>
+                    )
+                }
+            })}
+        </Menu>
     )
 };

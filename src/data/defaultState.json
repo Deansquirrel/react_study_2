@@ -6,5 +6,11 @@
   "user": {
     "isAuthenticated": false,
     "connectId": ""
+  },
+  "page":{
+    "manager":{
+      "menuOpenKey": "",
+      "menuSelectedKey": ""
+    }
   }
 }

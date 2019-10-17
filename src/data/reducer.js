@@ -56,6 +56,47 @@ export const user = (state={},action={}) => {
     }
 };
 
+export const page = (state={},action={}) => {
+    if (!action.hasOwnProperty("type")) {
+        return state;
+    }
+    switch (action.type) {
+        case C.PageManagerMenuOpenKey:
+        case C.PageManagerMenuSelectedKey:
+            return {
+                ...state,
+                manager:pageManager(state.manager,action),
+            };
+        default:
+            return state;
+    }
+};
+
+const pageManager = (state={},action={}) => {
+    switch (action.type) {
+        case C.PageManagerMenuOpenKey:
+            if(!action.hasOwnProperty("menuOpenKey")){
+                console.warn("unknown property menuOpenKey");
+                return state;
+            }
+            return {
+                ...state,
+                menuOpenKey: action.menuOpenKey,
+            };
+        case C.PageManagerMenuSelectedKey:
+            if(!action.hasOwnProperty("menuSelectedKey")){
+                console.warn("unknown property menuSelectedKey");
+                return state;
+            }
+            return {
+                ...state,
+                menuSelectedKey: action.menuSelectedKey,
+            };
+        default:
+            return state;
+    }
+};
+
 //
 // export const app = (state={},action={}) =>{
 //     switch (action.type) {
