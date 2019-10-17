@@ -11,5 +11,8 @@
   {"key":"testPage3","icon":"table","title":"TestPage3","child":[
     {"key":"testPage31","path":"31","title":"TestPage31"},
     {"key":"testPage32","path":"32","title":"TestPage32"}
+  ]},
+  {"key":"bizCharts","icon":"table","title":"BizCharts","child":[
+    {"key":"bizCharts","path":"bizCharts","title":"BizCharts"}
   ]}
 ]
