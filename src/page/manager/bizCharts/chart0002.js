@@ -80,7 +80,7 @@ const GetData = () => {
         {month: "Apr",city: "London",temperature: RandInt(0,15)},
         {month: "May",city: "Tokyo",temperature: RandInt(10,25)},
         {month: "May",city: "London",temperature: RandInt(10,20)},
-        {month: "Jun",city: "Tokyo",temperature: RandInt(10,70)},
+        {month: "Jun",city: "Tokyo",temperature: RandInt(10,25)},
         {month: "Jun",city: "London",temperature: RandInt(10,20)},
         {month: "Jul",city: "Tokyo",temperature: RandInt(10,25)},
         {month: "Jul",city: "London",temperature: RandInt(10,20)},
@@ -100,5 +100,4 @@ const GetData = () => {
 // 定义度量
 const cols = {
     month:{range:[0.05,0.95]},
-    temperature:{range:[0,0.9]}
 };
