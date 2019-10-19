@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Chart, Geom, Axis, Label, Legend, Tooltip} from 'bizcharts';
+import {Chart, Geom, Axis, Label, Tooltip} from 'bizcharts';
 
 import {RandInt} from "../../../common/common";
 
