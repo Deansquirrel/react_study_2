@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import { Chart, Geom, Axis, Tooltip, Legend,Label } from 'bizcharts';
 
-import "./bizCharts.css";
 import {RandInt} from "../../../common/common";
 
 export class Chart0001 extends Component {
