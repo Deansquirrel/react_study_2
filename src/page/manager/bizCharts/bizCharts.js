@@ -6,6 +6,7 @@ import {Chart0001} from "./chart0001";
 import {Chart0002} from "./chart0002";
 import {Chart0003} from "./chart0003";
 import {Chart0004} from "./chart0004";
+import {Chart0005} from "./chart0005";
 
 export class BizCharts extends BasePage {
     render() {
@@ -23,6 +24,9 @@ export class BizCharts extends BasePage {
                     </Col>
                     <Col xl={{span:12}} xxl={{span:8}}>
                         <Chart0004 />
+                    </Col>
+                    <Col xl={{span:12}} xxl={{span:8}}>
+                        <Chart0005 />
                     </Col>
                 </Row>
             </div>
