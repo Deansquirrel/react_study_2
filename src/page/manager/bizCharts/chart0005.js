@@ -59,7 +59,5 @@ const GetData = () => {
 
 // 定义度量
 const cols = {
-    sales: {
-        tickInterval: 20
-    }
+    sales: {tickInterval: 20},
 };
