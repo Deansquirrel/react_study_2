@@ -6,6 +6,7 @@ import {Manager} from "./manager/manager"
 import {checkLogin} from "../common/common";
 
 import store from "../data/store";
+import {Dashboard20191126} from "./dashboard20191126/dashboard";
 
 export class MyRoute extends Component {
     componentDidMount() {
@@ -20,8 +21,9 @@ export class MyRoute extends Component {
     render() {
         return (
             <Router>
-                <PrivateRoute exact  path="/" component={Welcome} />
+                <Route exact path="/" component={Dashboard20191126} />
                 <Route path="/login" component={Login} />
+                <PrivateRoute exact  path="/welcome" component={Welcome} />
                 <PrivateRoute path="/manager" component={Manager} />
             </Router>
         )

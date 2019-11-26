@@ -1,0 +1,12 @@
+.dashboard20191126{
+    padding: 16px;
+    /*background-color: #1890ff;*/
+    height: 100vh;
+    overflow-y:hidden;
+    background-color: white;
+}
+
+.viewContent{
+    /*background-color: #52c41a;*/
+    height: 100%;
+}
