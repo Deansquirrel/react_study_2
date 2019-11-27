@@ -3,10 +3,10 @@ import {applyMiddleware, combineReducers, createStore} from "redux";
 
 import {loggerMiddleware, ywMiddleware} from "./middleware";
 import defaultState from "./defaultState";
-import {global,user,page} from "./reducer";
+import {global, user, page, dashboard20191126} from "./reducer";
 
 const store = createStore(
-    combineReducers({global,user,page}),
+    combineReducers({global,user,page,dashboard20191126}),
     defaultState,
     applyMiddleware(ywMiddleware,loggerMiddleware)
     // applyMiddleware(logger)

@@ -1,6 +1,6 @@
 import React from "react";
 import {Row,Col} from 'antd';
-import {GsList, GsList2} from "./gsList";
+import {GsList} from "./gsList";
 import {GetTitleHeight, GetViewPadding} from "./common";
 
 export const ViewContent = ({title,value,list,table,onClickFun}) => {
@@ -8,7 +8,7 @@ export const ViewContent = ({title,value,list,table,onClickFun}) => {
     return (
         <div className={"viewContent"} style={{height:"100%"}}>
             <div style={{float:"right",width:"250px"}}>
-                <GsList2 list={list} onClickFun={onClickFun} />
+                <GsList list={list} onClickFun={onClickFun} />
             </div>
             <ViewTitle title={title} value={value} />
             <div style={{backgroundColor:"white",marginRight:"266px"}}>

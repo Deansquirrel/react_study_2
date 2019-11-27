@@ -116,6 +116,8 @@ export const dashboard20191126 = (state={},action={}) => {
                 console.warn("unknown property d1");
                 return state;
             }
+            console.log("update d1");
+            console.log(action.d1);
             return {
                 ...state,
                 d1: action.d1,
