@@ -1,7 +1,7 @@
 import React, {Component} from "react";
-import { Chart, Geom, Axis, Tooltip, Legend,Label } from 'bizcharts';
+import { Chart, Geom, Axis, Tooltip, Legend } from 'bizcharts';
 import {RandInt} from "../../common/common";
-import {GetMHeight} from "./common";
+import {GetTableHeight, GetViewPadding} from "./common";
 
 export class Table11 extends Component {
     constructor(props){
@@ -25,30 +25,58 @@ export class Table11 extends Component {
 
     render() {
         const data = this.state.data;
-        const tHeight = GetMHeight();
+        const tableHeight = GetTableHeight();
+        const p = GetViewPadding();
         return (
-            <div>
-                <Chart height={tHeight} data={data} scale={cols} forceFit>
+            <div style={{backgroundColor:"#172C3C"}}>
+                <Chart
+                    background={{fill:"#172C3C"}}
+                    plotBackground={{fill:"#172C3C"}}
+                    height={tableHeight}
+                    data={data}
+                    scale={cols}
+                    forceFit
+                    padding={{left:p,bottom:p,top:p,right:p*0.5}}
+                >
                     <Legend />
-                    <Axis name="year" title />
-                    <Axis name="value" title />
-                    <Tooltip
-                        crosshairs={{
-                            type: "y"
+                    <Axis
+                        name={"value"}
+                        label={{
+                            textStyle:{
+                                fill:"#E6B33D"
+                            }
                         }}
                     />
-                    <Geom type="line" position="year*value" size={2} />
+                    <Axis
+                        name={"year"}
+                        label={{
+                            textStyle:{
+                                fill:"#E6B33D"
+                            }
+                        }}
+                    />
+                    <Tooltip
+                        crosshairs={{
+                            type: "cross",
+                            style:{
+                                stroke:"#D96831",
+                                lineWidth:1
+                            }
+                        }}
+                    />
+                    <Geom type="line" color={'#E6B33D'} position="year*value" size={2} />
                     <Geom
                         type="point"
                         position="year*value"
+                        color={'#E6B33D'}
                         size={4}
                         shape={"circle"}
                         style={{
-                            stroke: "#fff",
+                            stroke: "#E6B33D",
                             lineWidth: 1
                         }}
                     >
-                        <Label content={"value"} />
+                        {/*<Label content={"value"} />*/}
                     </Geom>
                 </Chart>
             </div>
@@ -72,6 +100,10 @@ const GetData = () => {
 
 // 定义度量
 const cols = {
-    value: { alias:'value',range:[0,0.9]},
+    value: {
+        alias:'value',
+
+        tickCount:5
+    },
     year:{alias:"year",range:[0.05,0.95]}
 };

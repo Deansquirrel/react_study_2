@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Chart, Geom, Axis, Tooltip} from 'bizcharts';
 import {RandInt} from "../../common/common";
-import {GetMHeight} from "./common";
+import {GetTableHeight} from "./common";
 
 
 export class Table12 extends Component {
@@ -26,10 +26,10 @@ export class Table12 extends Component {
 
     render() {
         const data = this.state.data;
-        const tHeight = GetMHeight();
+        const tableHeight = GetTableHeight();
         return (
             <div>
-                <Chart height={tHeight} data={data} scale={cols} forceFit>
+                <Chart height={tableHeight} data={data} scale={cols} forceFit>
                     <Axis name="year" />
                     <Axis name="sales" />
                     <Tooltip

@@ -42,6 +42,59 @@ export const PageManagerMenuSelectedKeyAction = (menuSelectedKey="") => (
     }
 );
 
+export const Dashboard20191126CurrAction = (d1=-1,d2=-1,d3=-1,d4=-1) => (
+    {
+        type:C.Dashboard20191126Curr,
+        curr:{
+            d1:d1,
+            d2:d2,
+            d3:d3,
+            d4:d4
+        }
+    }
+);
+
+export const Dashboard20191126D1Action = (gs=[],data=[]) => (
+    {
+        type:C.Dashboard20191126D1,
+        d1:{
+            gs:gs,
+            data:data
+        }
+    }
+);
+
+export const Dashboard20191126D2Action = (gs=[],data=[]) => (
+    {
+        type:C.Dashboard20191126D2,
+        d1:{
+            gs:gs,
+            data:data
+        }
+    }
+);
+
+export const Dashboard20191126D3Action = (gs=[],data=[]) => (
+    {
+        type:C.Dashboard20191126D3,
+        d1:{
+            gs:gs,
+            data:data
+        }
+    }
+);
+
+export const Dashboard20191126D4Action = (gs=[],data=[]) => (
+    {
+        type:C.Dashboard20191126D4,
+        d1:{
+            gs:gs,
+            data:data
+        }
+    }
+);
+
+
 //
 // export const AppWsAddressAction = (wsAddress="") => (
 //     {
