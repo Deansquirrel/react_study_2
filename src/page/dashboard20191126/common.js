@@ -61,6 +61,43 @@ export const GetTestD1Data = (count=0,days=30) => {
     };
 };
 
+export const GetTestD2Data = (count=0) => {
+    if(count>30||count<0){
+        count=30;
+    }
+    let idList = [];
+    let id = -1;
+    for(let i=0;i<count;i++){
+        // eslint-disable-next-line
+        while(1===1){
+            id = RandInt(1,1000);
+            if(idList.indexOf(id)<0){
+                idList.push(id);
+                break;
+            }
+        }
+    }
+    let gs=[];
+    let data=[];
+    let i=0;
+    idList.forEach((item)=>{
+        gs.push({
+            id:item,
+            index:i,
+            name:"货品" + item
+        });
+        i = i+1;
+        data.push({
+            id:item,
+            num:RandInt(300,1000),
+        })
+    });
+    return {
+        gs:gs,
+        data:data
+    };
+};
+
 export const GetTestD3Data = (count=0) => {
     if(count>30||count<0){
         count=30;

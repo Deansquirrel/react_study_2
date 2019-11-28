@@ -4,13 +4,13 @@ import "./dashboard.css"
 import {ViewContent} from "./viewcontent";
 import {Table11} from "./table11";
 import {Table12} from "./table12";
-import {GetTestD1Data, GetTestD3Data, GetTestD4Data} from "./common";
+import {GetTestD1Data, GetTestD2Data, GetTestD3Data, GetTestD4Data} from "./common";
 import {RandInt} from "../../common/common";
 
 import store from '../../data/store';
 import {
     Dashboard20191126CurrAction,
-    Dashboard20191126D1Action,
+    Dashboard20191126D1Action, Dashboard20191126D2Action,
     Dashboard20191126D3Action,
     Dashboard20191126D4Action
 } from "../../data/actions";
@@ -39,28 +39,18 @@ import {
 } from "./tableData";
 import {Table22} from "./table22";
 
-const data = [
-    {
-        id:12345,
-        title:"一二三四五六一二三四五六一二三四五六一二三四五六"
-    },
-    {
-        id:1234,
-        title:"a"
-    }
-];
-
 const InitTestData = () => {
     const d1Data = GetTestD1Data(RandInt(3,20));
     store.dispatch(Dashboard20191126D1Action(d1Data.gs,d1Data.data));
+    const d2Data = GetTestD2Data(RandInt(10,20));
+    store.dispatch(Dashboard20191126D2Action(d2Data.gs,d2Data.data));
     const d3Data = GetTestD3Data(RandInt(10,20));
     store.dispatch(Dashboard20191126D3Action(d3Data.gs,d3Data.data));
     const d4Data = GetTestD4Data(RandInt(10,20));
     store.dispatch(Dashboard20191126D4Action(d4Data.gs,d4Data.data));
 
-    const curr = store.getState().dashboard20191126.curr;
     store.dispatch(Dashboard20191126CurrAction(d1Data.gs.length>0?0:-1,
-        curr.d2,
+        d2Data.gs.length>0?0:-1,
         d3Data.gs.length>0?0:-1,
         d4Data.gs.length>0?0:-1,));
 };
@@ -138,10 +128,10 @@ export class Dashboard20191126 extends Component{
                                 const curr = store.getState().dashboard20191126.curr;
                                 store.dispatch(Dashboard20191126CurrAction(curr.d1,k,curr.d3,curr.d4));
                             }}
-                            title={"test title"}
-                            value={25369.1}
-                            list={data}
-                            table={<Table12 />} />
+                            title={currD2Title}
+                            value={currD2Value}
+                            list={currD2List}
+                            table={<Table12 data={currD2TableData} />} />
                     </Col>
                     <Col span={12}>
                         <ViewContent

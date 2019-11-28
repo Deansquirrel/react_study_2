@@ -7,7 +7,6 @@ export const Table22 = ({data=[]}) => {
     const d = data.length===1?data[0].d:"";
     const kc = data.length===1?data[0].kc:"";
     const fontSize = (tableHeight * 0.5 - p*2) * 0.6;
-    console.log(data);
     return (
         <div style={{
             height:tableHeight,

@@ -114,15 +114,29 @@ export const GetD2List = () => {
 };
 
 export const GetD2TableData = (id=-1) => {
-    const d1Data = store.getState().dashboard20191126.d2.data.filter((item)=>{
-        return item.hasOwnProperty("id")&&item.id===id;
-    });
-    return jsonSort(d1Data.map((item)=>{
-        return {
-            title:item.date,
-            value:item.num
+    let curr = "";
+    const gs = store.getState().dashboard20191126.d2.gs;
+    const data = store.getState().dashboard20191126.d2.data;
+    const tableData = jsonSort(gs.map((item)=>{
+        const gsData = data.filter((dataItem)=>{
+            return dataItem.hasOwnProperty("id")&&dataItem.id===item.id;
+        });
+        if(gsData.length>0){
+            if(item.id===id){
+                curr=item.name;
+            }
+            return {
+                index:item.index,
+                title:item.name,
+                value:gsData[0].num
+            }
         }
-    }),"date",true);
+        return {};
+    }),"index",false);
+    return {
+        curr:curr,
+        data:tableData
+    }
 };
 
 export const GetD3Id = (index = -1) => {
