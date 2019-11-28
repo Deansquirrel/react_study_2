@@ -30,7 +30,8 @@ export const GsList = ({list,onClickFun=(k)=>{console.log(k)}}) => {
         }
     };
 
-    return (
+    if(data.length>0){
+        return (
             <Table
                 bordered={true}
                 rowClassName={"gsListRow"}
@@ -40,7 +41,15 @@ export const GsList = ({list,onClickFun=(k)=>{console.log(k)}}) => {
                 showHeader={false}
                 pagination={false}
                 scroll={{ y:tHeight}} />
-    )
+        )
+    }else{
+        return (
+            <div style={{width:"100%",height:tHeight,borderWidth:1,borderColor:"white"}}>
+            </div>
+        )
+    }
+
+
 };
 
 //

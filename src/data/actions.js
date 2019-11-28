@@ -67,7 +67,7 @@ export const Dashboard20191126D1Action = (gs=[],data=[]) => (
 export const Dashboard20191126D2Action = (gs=[],data=[]) => (
     {
         type:C.Dashboard20191126D2,
-        d1:{
+        d2:{
             gs:gs,
             data:data
         }
@@ -77,7 +77,7 @@ export const Dashboard20191126D2Action = (gs=[],data=[]) => (
 export const Dashboard20191126D3Action = (gs=[],data=[]) => (
     {
         type:C.Dashboard20191126D3,
-        d1:{
+        d3:{
             gs:gs,
             data:data
         }
@@ -87,7 +87,7 @@ export const Dashboard20191126D3Action = (gs=[],data=[]) => (
 export const Dashboard20191126D4Action = (gs=[],data=[]) => (
     {
         type:C.Dashboard20191126D4,
-        d1:{
+        d4:{
             gs:gs,
             data:data
         }
