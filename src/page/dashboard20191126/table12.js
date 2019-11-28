@@ -3,7 +3,6 @@ import {Chart, Geom, Axis, Tooltip, Legend} from 'bizcharts';
 import {GetTableHeight, GetViewPadding} from "./common";
 
 export const Table12 = ({data=[]}) => {
-    console.log(data);
     const tableHeight = GetTableHeight();
     const p = GetViewPadding();
     return (

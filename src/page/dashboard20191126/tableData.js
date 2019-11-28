@@ -86,21 +86,16 @@ export const GetD2Title = (id=-1) => {
 };
 
 export const GetD2Value = (id=-1) => {
-    const d1Data = store.getState().dashboard20191126.d2.data;
-    const data = d1Data.filter((item)=>{
+    const d2Data = store.getState().dashboard20191126.d2.data;
+    const data = d2Data.filter((item)=>{
         return item.hasOwnProperty("id")&&
             item.id===id&&
-            item.hasOwnProperty("date")&&
             item.hasOwnProperty("num");
     });
-    let currDate = "";
-    let num = "";
-    data.forEach((item)=>{
-        if(item.date>=currDate){
-            num = item.num;
-        }
-    });
-    return num;
+    if(data.length>0){
+        return data[0].num;
+    }
+    return "";
 };
 
 export const GetD2List = () => {

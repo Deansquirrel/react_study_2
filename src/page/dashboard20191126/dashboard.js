@@ -78,7 +78,6 @@ export class Dashboard20191126 extends Component{
     }
 
     render() {
-        console.log(store.getState());
         //================================================================================
         const currD1Index = store.getState().dashboard20191126.curr.d1;
         const currD1Id = GetD1Id(currD1Index);
